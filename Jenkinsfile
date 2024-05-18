@@ -12,6 +12,7 @@ pipeline {
 		stage ('Build and Create docker image') {
 			steps {
 				sh 'mvn clean install'
+				sh 'cp target/*.war /home/ubuntu/'
 				sh 'whoami'
 				sh 'docker build -t asifkhazi/example-img:${BUILD_ID} -f dockerfile .'
 			}
