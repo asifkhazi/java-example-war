@@ -13,7 +13,7 @@ pipeline {
 			steps {
 				sh 'mvn clean install'
 				sh 'whoami'
-				sh 'docker build -t asifkhazi/example-img:${BUILD_ID} -f ./dockerfile'
+				sh 'docker build -t asifkhazi/example-img:${BUILD_ID} -f dockerfile .'
 			}
 		}
 		stage ('Push image to artifactory') {
