@@ -1,7 +1,8 @@
 FROM ubuntu:latest
-WORKDIR /workspace/
-RUN mkdir /opt/tomcat && wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.89/bin/apache-tomcat-9.0.89.tar.gz && tar -xzvf apache-tomcat-9.0.89.tar.gz /opt/tomcat 
-RUN rm -f /opt/tomcat/bin/apache-tomcat-9.0.89.tar.gz
-COPY ./target/*.war /opt/tomcat/webapps
+WORKDIR /home/ubuntu/
+RUN apt update && apt install git -y
+RUN git clone https://github.com/asifkhazi/tomcat-installation-ubuntu.git .
+RUN bash install-tomcat-ubuntu.sh
+COPY /home/ubuntu/workspace/assignment-pipeline/target/*.war /opt/tomcat/apache-tomcat-9.0.68/webapps/
 EXPOSE: 8080
-ENTRYPOINT ["bash", "/opt/tomcat/bin/startup.sh"]
+ENTRYPOINT ["systemctl", "start", "tomcat"]
