@@ -1,7 +1,7 @@
 pipeline {
 	agent {label "new-node"}
 	environment {
-		Docker_Cred=credentials('Docker_cred')
+		Docker_Cred=credentials('Docker_Cred')
 	}
 	stages {
 		stage ('SCM checkout') {
