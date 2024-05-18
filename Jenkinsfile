@@ -18,8 +18,6 @@ pipeline {
 		}
 		stage ('Push image to artifactory') {
 			steps {
-				sh 'docker push asifkhazi/example-img:${BUILD_ID}'
-				sh 'docker image prune -a'
 				sh 'docker login -u ${Docker_Cred_USR} -p ${Docker_Cred_PSW}'
 				sh 'docker push asifkhazi/example-img:${BUILD_ID}'
 			}
