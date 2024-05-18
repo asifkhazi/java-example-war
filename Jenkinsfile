@@ -12,7 +12,7 @@ pipeline {
 		stage ('Build and Create docker image') {
 			steps {
 				sh 'mvn clean install'
-				sh 'docker build -t asifkhazi/example-img:${BUILD_ID} ./Dockerfile'
+				sh 'docker build -t asifkhazi/example-img:${BUILD_ID} ./dockerfile'
 			}
 		}
 		stage ('Push image to artifactory') {
