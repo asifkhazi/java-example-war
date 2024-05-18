@@ -4,7 +4,7 @@ pipeline {
 		Docker_Cred=credentials('Docker_cred')
 	}
 	stages {
-		stage ('SCM checkout') [
+		stage ('SCM checkout') {
 			steps {
 				git branch:'main', url:'https://github.com/asifkhazi/java-example-war.git'
 			}
