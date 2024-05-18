@@ -1,5 +1,5 @@
 pipeline {
-	agent any
+	agent {label "new-node"}
 	environment {
 		Docker_Cred=credentials('Docker_cred')
 	}
@@ -18,12 +18,14 @@ pipeline {
 		stage ('Push image to artifactory') {
 			steps {
 				sh 'docker push asifkhazi/example-img:${BUILD_ID}'
-				sh 'docker images prune -a'
+				sh 'docker image prune -a'
+				sh 'docker login -u ${Docker_Cred_USR} -p ${Docker_Cred_PSW}'
+				sh 'docker push asifkhazi/example-img:${BUILD_ID}'
 			}
 		}
-		stage ('Push image to artifactory') {
+		stage ('Deploy') {
 			steps {
-				sh 'docker run -itd --name cont${BUILD_ID} -p 80:80 asifkhazi/example-img:${BUILD_ID}'
+				sh 'docker run -itd --name cont-${BUILD_ID} -p 8080:8080 asifkhazi/example-img:${BUILD_ID}'
 			}
 		}
 		
