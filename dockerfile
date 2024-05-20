@@ -1,4 +1,3 @@
-FROM fabric8/tomcat-9:latest
+FROM asifkhazi/tomcat-run:latest
 WORKDIR /opt/tomcat/webapps/
 COPY ./*.war .
-CMD ["systemctl", "start", "tomcat"]
