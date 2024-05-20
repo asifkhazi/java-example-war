@@ -13,7 +13,6 @@ pipeline {
 			steps {
 				sh 'mvn clean install'
 				sh 'docker login -u ${Docker_Cred_USR} -p ${Docker_Cred_PSW}'
-				sh 'pwd && whoami'
 				sh 'docker build -t asifkhazi/tomcat-run:${BUILD_ID} -f dockerfile .'
 			}
 		}
