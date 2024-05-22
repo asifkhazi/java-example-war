@@ -1,5 +1,5 @@
 FROM maven:amazoncorretto as maven
-WORKDIR: /app
+WORKDIR /app
 COPY . .
 RUN mvn clean install
 
