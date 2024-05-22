@@ -11,19 +11,18 @@ pipeline {
 		}
 		stage ('Build and Create docker image') {
 			steps {
-				sh 'mvn clean install'
-				sh 'docker login -u ${Docker_Cred_USR} -p ${Docker_Cred_PSW}'
-				sh 'docker build -t asifkhazi/tomcat-run:${BUILD_ID} -f dockerfile .'
+				sh 'docker build -t ${Dockr_Cred_USR}/tomcat:${BUILD_ID} -f Dockerfile1 .'
 			}
 		}
 		stage ('Push image to artifactory') {
 			steps {
-				sh 'docker push asifkhazi/tomcat-run:${BUILD_ID}'
+				sh 'docker login -u ${Docker_Cred_USR} -p ${Docker_Cred_PSW}'
+				sh 'docker push ${Dockr_Cred_USR}/tomcat:${BUILD_ID}'
 			}
 		}
 		stage ('Deploy') {
 			steps {
-				sh 'docker run -itd --name cont-${BUILD_ID} -p 8080:8080 asifkhazi/tomcat-run:${BUILD_ID}'
+				sh 'docker run -itd --name cont-${BUILD_ID} -p 8080:8080 ${Dockr_Cred_USR}/tomcat:${BUILD_ID}'
 			}
 		}
 		
